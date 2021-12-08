@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import Header from "../../components/Header";
 import Select from "../../components/Select";
 import TaskItemList from "../../components/TaskItemList";
@@ -70,7 +70,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <Header />
       <Select />
       <FlatList
@@ -79,16 +79,12 @@ const Home = () => {
         keyExtractor={(item) => item.id}
         extraData={selectedId}
       />
-    </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: "#F7F7F7",
-  },
+
   item: {
     padding: 20,
     marginVertical: 2,

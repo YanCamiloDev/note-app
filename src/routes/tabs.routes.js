@@ -27,7 +27,7 @@ const TabRouter = () => {
       }}
     >
       <AppTab.Screen
-        name="Nova Planta"
+        name="Home"
         component={Home}
         options={{
           tabBarIcon: (({ size, color }) => (
@@ -53,7 +53,7 @@ const TabRouter = () => {
         }}
       />
       <AppTab.Screen
-        name="Minhas Plantas"
+        name="Search"
         component={Home}
         options={{
           tabBarIcon: (({ size, color }) => (
