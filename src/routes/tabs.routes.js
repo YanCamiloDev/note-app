@@ -41,7 +41,7 @@ const TabRouter = () => {
         }}
       />
       <AppTab.Screen
-        name="Rocket"
+        name="fab"
         component={Home}
         options={{
           tabBarButton: (props) => (
