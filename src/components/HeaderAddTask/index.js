@@ -1,15 +1,16 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
 import Color from '../../../assets/color.jpeg'
 import { Ionicons } from '@expo/vector-icons';
-import { TextInput } from "react-native-gesture-handler";
 
-export default function HeaderAddTask() {
+export default function HeaderAddTask(props) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <Ionicons style={{ marginTop: 2, marginLeft: 10 }} name="checkmark-sharp" size={30} color="black" />
-        <TextInput style={styles.textInput} />
+        <TouchableOpacity>
+          <Ionicons style={{ marginTop: 2, marginLeft: 10 }} name="checkmark-sharp" size={30} color="black" />
+        </TouchableOpacity>
+        <TextInput style={styles.textInput} placeholder="Adicione um título" />
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Image source={Color} style={{ height: 25, width: 27 }} />

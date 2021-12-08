@@ -15,9 +15,7 @@ const AppRoutes = () => (
       headerShown: false,
     }}>
     <stackRoutes.Screen name="HomeTab" component={TabRoutes} />
-
     <stackRoutes.Screen name="AddTask" component={AddTask} />
-
   </stackRoutes.Navigator>
 )
 
