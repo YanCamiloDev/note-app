@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import Home from "../Screens/Home";
 import { TabBarAdvancedButton } from "./fabTab";
+import AddTask from "../Screens/AddTask";
 
 const AppTab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ const TabRouter = () => {
             <Ionicons
               name="calendar-sharp"
               size={size}
-              color="#009688"
+              color={color}
             />
           )),
           tabBarLabel: () => null
@@ -42,7 +43,7 @@ const TabRouter = () => {
       />
       <AppTab.Screen
         name="fab"
-        component={Home}
+        component={AddTask}
         options={{
           tabBarButton: (props) => (
             <TabBarAdvancedButton
@@ -51,6 +52,12 @@ const TabRouter = () => {
             />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: event => {
+            event.preventDefault()
+            navigation.navigate('AddTask')
+          }
+        })}
       />
       <AppTab.Screen
         name="Search"

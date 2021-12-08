@@ -1,10 +1,10 @@
 import React from "react"
 import { NavigationContainer } from "@react-navigation/native";
-import TabRouter from "./tabs.routes";
+import AppRoutes from "./stack.routes";
 
 const Routes = () => (
   <NavigationContainer>
-    <TabRouter />
+    <AppRoutes />
   </NavigationContainer>
 )
 
