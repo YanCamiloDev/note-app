@@ -1,80 +1,70 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import Header from "../../components/Header";
 import Select from "../../components/Select";
 import TaskItemList from "../../components/TaskItemList";
+import { useRoute } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const DATA = [
-  {
-    id: "1",
-    title: "Alamat Kantor",
-    date: "14.16",
-    colorbackground: "#FFFBBC",
-    borderLeftColor: "yellow",
-
-  },
-  {
-    id: "2",
-    title: "Blog update",
-    date: "23 Mei 2016",
-    colorbackground: "#F7DFFF",
-    borderLeftColor: "purple",
-  },
-  {
-    id: "3",
-    title: "Buku Harian",
-    date: "24 Feb",
-    colorbackground: "#E6FADF",
-    borderLeftColor: "green",
-  },
-  {
-    id: "4",
-    title: "buku-buku",
-    date: "23 Mei 2016",
-    colorbackground: "#E6FADF",
-    borderLeftColor: "green",
-  },
-  {
-    id: "5",
-    title: "ColorNote",
-    date: "24 Mei 2016",
-    colorbackground: "#E7E7E7",
-    borderLeftColor: "blue",
-  },
-  {
-    id: "6",
-    title: "Daftar Belanja",
-    date: "24 Feb",
-    colorbackground: "#FFFBBC",
-    borderLeftColor: "yellow",
-  },
-];
 
 const Home = () => {
   const [selectedId, setSelectedId] = useState(null);
+  const routes = useRoute();
+  const [notes, setNotes] = useState([]);
 
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : item.colorbackground;
-    const color = item.id === selectedId ? 'white' : 'black';
-    const borderLeftColor = item.borderLeftColor;
+    const {
+      colorMain,
+      colorBorder,
+      colorText
+    } = item.colors
+    const backgroundColor = colorMain;
+    const borderLeftColor = colorBorder;
 
     return (
       <TaskItemList
         item={item}
         onPress={() => setSelectedId(item.id)}
         backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
+        textColor={{ colorText }}
         borderLeftColor={{ borderLeftColor }}
       />
     );
   };
+
+  React.useEffect(() => {
+    if (routes.params) {
+      console.log(routes.params);
+      const { msg, type } = routes.params
+      if (msg) {
+        Toast.show({
+          type: `${type}`,
+          text1: `${msg}`,
+        });
+      }
+    }
+  }, [routes.params]);
+
+  React.useEffect(() => {
+    async function getNotes() {
+      const notes = await AsyncStorage.getItem("@noteapp:notes");
+      if (JSON.parse(notes)) {
+        const dados = JSON.parse(notes);
+        const array = Object.keys(dados).map((note) => dados[note]);
+        setNotes(array)
+      }
+
+    }
+    getNotes();
+  }, [routes])
 
   return (
     <>
       <Header />
       <Select />
       <FlatList
-        data={DATA}
+        data={notes}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         extraData={selectedId}
@@ -83,25 +73,5 @@ const Home = () => {
   );
 };
 
-const styles = StyleSheet.create({
-
-  item: {
-    padding: 20,
-    marginVertical: 2,
-    marginHorizontal: 2,
-    borderLeftWidth: 5,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 32,
-  },
-  date: {
-    marginTop: 10,
-    marginLeft: 10,
-    flexWrap: "wrap",
-  }
-});
 
 export default Home;

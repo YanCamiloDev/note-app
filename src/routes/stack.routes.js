@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import TabRoutes from "./tabs.routes";
-import AddTask from "../Screens/AddTask";
+import AddNote from "../Screens/AddNote";
 
 const stackRoutes = createStackNavigator();
 
@@ -15,7 +15,7 @@ const AppRoutes = () => (
       headerShown: false,
     }}>
     <stackRoutes.Screen name="HomeTab" component={TabRoutes} />
-    <stackRoutes.Screen name="AddTask" component={AddTask} />
+    <stackRoutes.Screen name="AddNote" component={AddNote} />
   </stackRoutes.Navigator>
 )
 

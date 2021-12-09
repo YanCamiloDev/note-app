@@ -7,7 +7,7 @@ const Select = () => {
   return (
     <View style={styles.container}>
       <Text>
-        Urutkan alfabet
+        Mais Recentes
       </Text>
       <Ionicons style={{ marginTop: 2, marginLeft: 10 }} name="caret-down-sharp" size={18} color="black" />
     </View>

@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import Home from "../Screens/Home";
 import { TabBarAdvancedButton } from "./fabTab";
-import AddTask from "../Screens/AddTask";
+import AddNote from "../Screens/AddNote";
 
 const AppTab = createBottomTabNavigator();
 
@@ -12,11 +12,9 @@ const TabRouter = () => {
   return (
     <AppTab.Navigator
       screenOptions={{
-        // activeBackgroundColor: colors.shape,
-        // inactiveBackgroundColor: colors.shape,
+        // activeBackgroundColor: "#009688",
         labelPosition: 'beside-icon',
         headerShown: false,
-        backgroundColor: 'red',
         tabBarStyle: {
           backgroundColor: '#F1F1F1'
         },
@@ -35,7 +33,7 @@ const TabRouter = () => {
             <Ionicons
               name="calendar-sharp"
               size={size}
-              color={color}
+              color={"#009688"}
             />
           )),
           tabBarLabel: () => null
@@ -43,7 +41,7 @@ const TabRouter = () => {
       />
       <AppTab.Screen
         name="fab"
-        component={AddTask}
+        component={AddNote}
         options={{
           tabBarButton: (props) => (
             <TabBarAdvancedButton
@@ -55,7 +53,7 @@ const TabRouter = () => {
         listeners={({ navigation }) => ({
           tabPress: event => {
             event.preventDefault()
-            navigation.navigate('AddTask')
+            navigation.navigate('AddNote')
           }
         })}
       />
@@ -67,7 +65,7 @@ const TabRouter = () => {
             <Ionicons
               name="search-sharp"
               size={size}
-              color={color}
+              color={"#009688"}
             />
           )),
           tabBarShowLabel: false,

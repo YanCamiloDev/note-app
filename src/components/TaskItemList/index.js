@@ -1,11 +1,13 @@
+import moment from "moment";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import 'moment/locale/pt-br';
 
 export default function TaskItemList({ item, onPress, backgroundColor, textColor, borderLeftColor }) {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor, borderLeftColor]}>
-      <Text style={[styles.title, textColor]}>{item.title}</Text>
-      <Text style={[styles.date]}>{item.date}</Text>
+      <Text style={[styles.title, textColor]} numberOfLines={1}>{item.titleNote}</Text>
+      <Text style={[styles.date]}>{moment(item.date).fromNow()}</Text>
     </TouchableOpacity>
   );
 }
@@ -13,7 +15,8 @@ export default function TaskItemList({ item, onPress, backgroundColor, textColor
 
 const styles = StyleSheet.create({
   item: {
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     marginVertical: 2,
     marginHorizontal: 2,
     borderLeftWidth: 5,
@@ -22,10 +25,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: {
-    fontSize: 23,
+    fontSize: 21,
+    flex: 1, marginRight: 5
   },
   date: {
-    marginTop: 10,
     marginLeft: 10,
     flexWrap: "wrap",
   }
