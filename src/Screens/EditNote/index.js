@@ -6,42 +6,40 @@ import uuid from 'react-native-uuid';
 import { useNavigation } from '@react-navigation/core';
 import ColorPicker from '../../components/ColorPicker';
 import { invertColor } from '../../utils/ColorFunctions';
+import { useRoute } from '@react-navigation/native';
 
-export default function AddNote() {
-  const [text, setText] = React.useState('');
-  const [title, setTitle] = React.useState('');
-  const [colorMain, setNewColor] = React.useState({ color: '#F5DA66', colorText: '#000', colorBackAlt: "#FFEAD6" })
+export default function EditNote() {
+  const route = useRoute();
+  const { item } = route.params;
+  const [text, setText] = React.useState(item.note);
+  const [title, setTitle] = React.useState(item.titleNote);
+  const [colorMain, setNewColor] = React.useState({ color: item.colorTheme.color, colorText: item.colorTheme.colorText, colorBackAlt: item.colorTheme.colorBackAlt })
   const [selectColor, setSelectColor] = React.useState(false);
   const navigation = useNavigation()
 
   async function save() {
     try {
-      // await AsyncStorage.removeItem('@noteapp:notes')
       const data = await AsyncStorage.getItem('@noteapp:notes');
       const oldNotes = data ? JSON.parse(data) : {};
-      const id = uuid.v4();
-      const newNote = {
-        [id]: {
-          id: id,
-          titleNote: title, note: text,
-          colors: {
-            colorMain: colorMain.colorBackAlt,
-            colorBorder: colorMain.color,
-            colorText: colorMain.colorText,
-          },
-          colorTheme: colorMain,
-          date: new Date()
-        }
-      }
+      console.log('Notas origin: ');
+      console.log(oldNotes);
+      oldNotes[item.id] = {
+        id: item.id,
+        titleNote: title, note: text,
+        colors: {
+          colorMain: colorMain.colorBackAlt,
+          colorBorder: colorMain.color,
+          colorText: colorMain.colorText,
+        },
+        colorTheme: colorMain,
+        date: item.date
+      };
+      console.log("NOTAS: ");
+      console.log(oldNotes);
       await AsyncStorage.setItem('@noteapp:notes',
-        JSON.stringify({
-          ...newNote, ...oldNotes
-        })
+        JSON.stringify(oldNotes)
       );
-      navigation.navigate('Home', {
-        msg: 'Nota Adicionada',
-        type: 'success'
-      });
+      navigation.navigate('Home');
     } catch (error) {
       throw new Error(error);
     }
@@ -55,6 +53,7 @@ export default function AddNote() {
     setText(text)
     setTitle(text)
   }
+
 
   return (
     <>

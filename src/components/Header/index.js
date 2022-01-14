@@ -10,10 +10,10 @@ export default function Header() {
         <Text style={styles.textTitle}>Color Note</Text>
         {/* <Text style={styles.userName}>{userName}</Text> */}
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Image source={Color} style={{ height: 25, width: 27 }} />
         <Ionicons style={{ marginTop: 2, marginLeft: 10 }} name="ellipsis-vertical-sharp" size={30} color="black" />
-      </View>
+      </View> */}
     </View>
   )
 }

@@ -3,9 +3,9 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import 'moment/locale/pt-br';
 
-export default function TaskItemList({ item, onPress, backgroundColor, textColor, borderLeftColor }) {
+export default function TaskItemList({ item, onPress, longPress, backgroundColor, textColor, borderLeftColor }) {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor, borderLeftColor]}>
+    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor, borderLeftColor]} onLongPress={longPress}>
       <Text style={[styles.title, textColor]} numberOfLines={1}>{item.titleNote}</Text>
       <Text style={[styles.date]}>{moment(item.date).fromNow()}</Text>
     </TouchableOpacity>
