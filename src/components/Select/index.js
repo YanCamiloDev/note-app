@@ -1,16 +1,16 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 
-const Select = () => {
+const Select = ({ showModal }) => {
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={showModal}>
       <Text>
         Mais Recentes
       </Text>
       <Ionicons style={{ marginTop: 2, marginLeft: 10 }} name="caret-down-sharp" size={18} color="black" />
-    </View>
+    </TouchableOpacity>
   );
 }
 

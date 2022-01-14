@@ -6,6 +6,7 @@ import TaskItemList from "../../components/TaskItemList";
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Modal from "../../components/Modal";
 
 
 const Home = () => {
@@ -13,6 +14,8 @@ const Home = () => {
   const routes = useRoute();
   const [notes, setNotes] = useState([]);
   const nav = useNavigation()
+  const [showModal, setModal] = useState(false);
+  const [order, setOrder] = useState('r');
 
   const renderItem = ({ item }) => {
     const {
@@ -88,16 +91,22 @@ const Home = () => {
     }, [])
   )
 
+  function setShowModal() {
+    console.log(showModal);
+    setModal(true)
+  }
+
   return (
     <>
       <Header />
-      <Select />
+      <Select showModal={setShowModal} />
       <FlatList
         data={notes}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         extraData={selectedId}
       />
+      {showModal && <Modal cancel={e => setModal(false)} itemSelect={order} />}
     </>
   );
 };
